@@ -19,4 +19,4 @@ TikTok Watermark remover is a bot that removes TikTok watermark from any receive
 
 **Note:**
 
- Click ➡️ [here](t.me/tikwatermark_remover_bot) ⬅️ to visit our bot.
+ Click ➡️ [here](https://t.me/tikwatermark_remover_bot) ⬅️ to visit our bot.
