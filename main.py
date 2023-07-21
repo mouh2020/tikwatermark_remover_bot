@@ -37,16 +37,15 @@ def echo_message(message):
             tiktok_video_link  = get_valid_link(tiktok_link=message.text)
             logger.info(f'convert link to : {str(tiktok_video_link)}')
             if tiktok_video_link :
-                bot.edit_message_text(text="Removing watermark ...",
+                message_id =bot.edit_message_text(text="Removing watermark ...",
                                     chat_id=message.from_user.id,
-                                    message_id=message_id) 
+                                    message_id=message_id).id
                 video_link = download_video(tiktok_video_link)
                 logger.info(f'download video link : {str(video_link)}')
-                bot.edit_message_text(text=f"Watermark was removed successfully 👌",
-                                      chat_id=message.from_user.id,
-                                      message_id=message_id,
-                                      reply_markup=download_button(str(message.from_user.id),str(message_id),video_link)
-                                        )
+                message_id =bot.edit_message_text(text="Watermark was removed successfully 👌",
+                                        chat_id=message.from_user.id,
+                                        message_id=message_id,
+                                        reply_markup=download_button(str(message.from_user.id),str(message_id),video_link)).id
                 return
             return
         bot.edit_message_text(chat_id= message.from_user.id,
