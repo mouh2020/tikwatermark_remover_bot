@@ -48,9 +48,7 @@ def echo_message(message):
                                         message_id=message_id,
                                         reply_markup=download_button(str(message.from_user.id),str(message_id),video_link)
                                         )
-                    bot.send_video(chat_id=message.from_user.id,
-                                video=video_link,
-                                reply_markup=download_button(str(message.from_user.id),str(message_id),video_link))
+
                     return
                 bot.edit_message_text(text="Unable to remove watermark ❌",
                                     chat_id=message.from_user.id,
