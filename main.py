@@ -4,7 +4,6 @@ from config import bot_token
 from utils import get_valid_link,download_video
 from loguru import logger
 
-
 logger.add("watermark_bot.log",format="{time:YYYY-MM-DD HH:mm:ss} | {level} | {function} | {message}",colorize=False,enqueue=True,mode="w")
 
 bot = telebot.TeleBot(bot_token)
@@ -22,8 +21,6 @@ def download_button(chat_id,message_id,url) :
     markup = InlineKeyboardMarkup()
     markup.add(InlineKeyboardButton(text="Click to download video from Source ✅", url=url ,callback_data="source_video"))
     return markup
-
-
 
 # Handle all other messages with content_type 'text' (content_types defaults to ['text'])
 @bot.message_handler(func=lambda message: True)
@@ -79,4 +76,5 @@ def echo_message(message):
         bot.edit_message_text(chat_id= message.from_user.id,
                               text="An error occured.\nPlease try again.",
                               message_id=message_id)
+        
 bot.infinity_polling()
