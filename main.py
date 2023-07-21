@@ -51,6 +51,7 @@ def echo_message(message):
                         bot.send_video(chat_id=message.from_user.id,
                                     video=video_link,
                                     reply_markup=download_button(str(message.from_user.id),str(message_id),video_link))
+                        return
                 except Exception as e : 
                     bot.edit_message_text(text=f"Watermark was removed successfully 👌",
                                         chat_id=message.from_user.id,
