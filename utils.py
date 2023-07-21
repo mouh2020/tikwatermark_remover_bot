@@ -1,4 +1,5 @@
 from requests import get,Response,post
+from config import rapid_api_key
 import random,time,re
 
 def download_video(tiktok_link) : 
@@ -8,7 +9,7 @@ def download_video(tiktok_link) :
 
     headers = {
         "content-type": "application/json",
-        "X-RapidAPI-Key": "c646e4968amsh1a35028fd78eca6p170e36jsn1a2cd1eb640b",
+        "X-RapidAPI-Key": rapid_api_key,
         "X-RapidAPI-Host": "tikwatermark.p.rapidapi.com"
     }
     try :
