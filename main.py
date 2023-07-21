@@ -19,7 +19,7 @@ I'am here to remove watermarks from TikTok videos.\nJust send the link and i wil
 
 def download_button(chat_id,message_id,url) :
     markup = InlineKeyboardMarkup()
-    markup.add(InlineKeyboardButton(text="Click to download video from Source ✅", url=url ,callback_data="source_video"))
+    markup.add(InlineKeyboardButton(text="Click to download video from Source ✅", url=url))
     return markup
 
 # Handle all other messages with content_type 'text' (content_types defaults to ['text'])
@@ -42,10 +42,10 @@ def echo_message(message):
                                     message_id=message_id).id
                 video_link = download_video(tiktok_video_link)
                 logger.info(f'download video link : {str(video_link)}')
-                message_id =bot.edit_message_text(text="Watermark was removed successfully 👌",
-                                        chat_id=message.from_user.id,
-                                        message_id=message_id,
-                                        reply_markup=download_button(str(message.from_user.id),str(message_id),video_link)).id
+                message_id = bot.edit_message_text(text="Watermark was removed successfully 👌",
+                                                   chat_id=message.from_user.id,
+                                                   message_id=message_id,
+                                                   reply_markup=download_button(str(message.from_user.id),str(message_id),video_link)).id
                 return
             return
         bot.edit_message_text(chat_id= message.from_user.id,
