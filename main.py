@@ -19,7 +19,7 @@ I'am here to remove watermarks from TikTok videos.\nJust send the link and i wil
 
 def download_button(chat_id,message_id,url) :
     markup = InlineKeyboardMarkup()
-    markup.add(InlineKeyboardButton(text="Click here to download video from Source ✅", url=url))
+    markup.add(InlineKeyboardButton(text="Click to download video from Source ✅", url=url ,callback_data="source_video"))
     return markup
 
 # Handle all other messages with content_type 'text' (content_types defaults to ['text'])
@@ -37,16 +37,37 @@ def echo_message(message):
             tiktok_video_link  = get_valid_link(tiktok_link=message.text)
             logger.info(f'convert link to : {str(tiktok_video_link)}')
             if tiktok_video_link :
-                message_id =bot.edit_message_text(text="Removing watermark ...",
+                bot.edit_message_text(text="Removing watermark ...",
                                     chat_id=message.from_user.id,
-                                    message_id=message_id).id
+                                    message_id=message_id) 
                 video_link = download_video(tiktok_video_link)
                 logger.info(f'download video link : {str(video_link)}')
-                message_id = bot.edit_message_text(text="Watermark was removed successfully 👌",
-                                                   chat_id=message.from_user.id,
-                                                   message_id=message_id,
-                                                   reply_markup=download_button(str(message.from_user.id),str(message_id),video_link)).id
+                try :
+                    if video_link :
+                        bot.edit_message_text(text=f"Watermark was removed successfully 👌",
+                                            chat_id=message.from_user.id,
+                                            message_id=message_id,
+                                            )
+                        bot.send_video(chat_id=message.from_user.id,
+                                       video=video_link,
+                                    )
+                        return
+                except Exception as e : 
+                    bot.edit_message_text(text=f"Watermark was removed successfully 👌",
+                                        chat_id=message.from_user.id,
+                                        message_id=message_id,
+                                        reply_markup=download_button(str(message.from_user.id),str(message_id),video_link)
+                                        )
+                    logger.error(f'error occured {str(e)}')
+                    return
+                
+                bot.edit_message_text(text="Unable to remove watermark ❌",
+                                    chat_id=message.from_user.id,
+                                    message_id=message_id,) 
                 return
+            bot.edit_message_text(chat_id= message.from_user.id,
+                                text="Unable to convert the link.",
+                                message_id=message_id)
             return
         bot.edit_message_text(chat_id= message.from_user.id,
                             text="Please enter a valid TikTok link.",
