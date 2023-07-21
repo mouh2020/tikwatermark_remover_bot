@@ -17,4 +17,5 @@ TikTok Watermark remover is a bot that removes TikTok watermark from any receive
 ```
 *   The bot starts converting any received TikTok video link.
 
-Our Bot [here](t.me/tikwatermark_remover_bot).
+**Note:**
+➡️ Click here [here](t.me/tikwatermark_remover_bot) to visit our bot.
