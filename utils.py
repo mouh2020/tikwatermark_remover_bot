@@ -3,10 +3,9 @@ import random,time,re
 
 def download_video(tiktok_link) : 
     url = "https://tikwatermark.p.rapidapi.com/video_without_watermark"
-    payload = {
-        "video_link": tiktok_link,
-        "is_share_link": False
-        }  
+    querystring = {"video_link":tiktok_link,
+                   "is_share_link":"false"}
+
     headers = {
         "content-type": "application/json",
         "X-RapidAPI-Key": "c646e4968amsh1a35028fd78eca6p170e36jsn1a2cd1eb640b",
@@ -14,7 +13,7 @@ def download_video(tiktok_link) :
     }
     try :
         response = post(url=url,
-                        json=payload,
+                        params=querystring,
                         headers=headers)
         return response.json().get("no_watermark_video_link")
     except  :
