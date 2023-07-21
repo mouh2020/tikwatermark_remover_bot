@@ -42,22 +42,22 @@ def echo_message(message):
                                     message_id=message_id) 
                 video_link = download_video(tiktok_video_link)
                 logger.info(f'download video link : {str(video_link)}')
-                if video_link :
-                    bot.edit_message_text(text=f"Watermark was removed successfully 👌",
-                                          chat_id=message.from_user.id,
-                                          message_id=message_id,
-                                          )
-                    try :
-                        bot.send_video(chat_id=message.from_user.id,
-                                    video=video_link,
-                                    reply_markup=download_button(str(message.from_user.id),str(message_id),video_link))
-                    except Exception as e : 
+                try :
+                    if video_link :
                         bot.edit_message_text(text=f"Watermark was removed successfully 👌",
                                             chat_id=message.from_user.id,
                                             message_id=message_id,
-                                            reply_markup=download_button(str(message.from_user.id),str(message_id),video_link)
                                             )
-                        logger.error(f'error occured {str(e)}')
+                        bot.send_video(chat_id=message.from_user.id,
+                                    video=video_link,
+                                    reply_markup=download_button(str(message.from_user.id),str(message_id),video_link))
+                except Exception as e : 
+                    bot.edit_message_text(text=f"Watermark was removed successfully 👌",
+                                        chat_id=message.from_user.id,
+                                        message_id=message_id,
+                                        reply_markup=download_button(str(message.from_user.id),str(message_id),video_link)
+                                        )
+                    logger.error(f'error occured {str(e)}')
                     return
                 
                 bot.edit_message_text(text="Unable to remove watermark ❌",
